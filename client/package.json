@@ -6,8 +6,8 @@
   "scripts": {
     "analyze": "cross-env NODE_ENV=development webpack --analyze",
     "prebuild": "rimraf ../dist",
-    "build": "cross-env NODE_ENV=development webpack",
-    "develop": "cross-env NODE_ENV=development webpack serve"
+    "build": "cross-env NODE_ENV=production webpack --config webpack.prd.js",
+    "develop": "cross-env NODE_ENV=development webpack serve --config webpack.dev.js"
   },
   "dependencies": {
     "buffer": "^6.0.3",
@@ -57,7 +57,8 @@
     "webpack": "^5.35.1",
     "webpack-bundle-analyzer": "^4.4.1",
     "webpack-cli": "^4.6.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
   },
   "engines": {
     "node": "14.x.x"
