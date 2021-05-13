@@ -15,7 +15,12 @@ async function fetchBinary(url) {
  * @returns {Promise<T>}
  */
 async function fetchJSON(url) {
-  const result = await fetch(url).then((res) => res.json());
+  const result = await fetch(url).then((res) => {
+    if (res.statusText !== 'OK') {
+      throw new Error('TODO: Failed to fetch json.');
+    }
+    return res.json();
+  });
   return result;
 }
 
