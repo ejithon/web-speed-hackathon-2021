@@ -21,7 +21,7 @@ const InfiniteScroll = ({ children, fetchMore }) => {
       prevReachedRef.current = hasReached;
     };
 
-    document.addEventListener('scroll', handler, { passive: false });
+    document.addEventListener('scroll', handler, { passive: true });
     return () => {
       document.removeEventListener('scroll', handler);
     };
