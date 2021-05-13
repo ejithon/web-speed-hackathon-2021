@@ -1,12 +1,12 @@
 const path = require('path');
 
+const BrotliPlugin = require('brotli-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 const webpack = require('webpack');
 
 const SRC_PATH = path.resolve(__dirname, './src');
-const PUBLIC_PATH = path.resolve(__dirname, '../public');
-const UPLOAD_PATH = path.resolve(__dirname, '../upload');
 const DIST_PATH = path.resolve(__dirname, '../dist');
 
 /** @type {import('webpack').Configuration} */
@@ -58,6 +58,12 @@ const config = {
     new HtmlWebpackPlugin({
       inject: false,
       template: path.resolve(SRC_PATH, './index.html'),
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0.8,
     }),
   ],
   resolve: {
