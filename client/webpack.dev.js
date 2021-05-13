@@ -17,7 +17,7 @@ const config = {
       '/api': 'http://localhost:3000',
     },
   },
-  devtool: 'eval',
+  devtool: 'eval-cheap-module-source-map',
   mode: 'development',
 };
 
