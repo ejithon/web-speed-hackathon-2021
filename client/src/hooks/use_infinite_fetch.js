@@ -15,10 +15,11 @@ const LIMIT = 10;
  * @template T
  * @param {string} apiPath
  * @param {(apiPath: string) => Promise<T[]>} fetcher
+ * @param {{limit: number, offset: number}} opts
  * @returns {ReturnValues<T>}
  */
-export function useInfiniteFetch(apiPath, fetcher) {
-  const internalRef = React.useRef({ isLoading: false, offset: 0 });
+export function useInfiniteFetch(apiPath, fetcher, { limit = LIMIT, offset = 0 } = {}) {
+  const internalRef = React.useRef({ isLoading: false, offset });
 
   const [result, setResult] = React.useState({
     data: [],
@@ -42,16 +43,16 @@ export function useInfiniteFetch(apiPath, fetcher) {
     };
 
     try {
-      const allData = await fetcher(apiPath);
+      const allData = await fetcher(`${apiPath}?limit=${limit}&offset=${offset}`);
 
       setResult((cur) => ({
         ...cur,
-        data: [...cur.data, ...allData.slice(offset, offset + LIMIT)],
+        data: [...cur.data, ...allData.slice(0, limit)],
         isLoading: false,
       }));
       internalRef.current = {
         isLoading: false,
-        offset: offset + LIMIT,
+        offset: offset + limit,
       };
     } catch (error) {
       setResult((cur) => ({
