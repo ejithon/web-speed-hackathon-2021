@@ -1,4 +1,4 @@
-import { chunk, map, max, mean, zip } from 'lodash-es';
+import { chunk, map, max as lodashMax, mean, zip } from 'lodash-es';
 import React from 'react';
 
 /**
@@ -33,7 +33,7 @@ const SoundWaveSVG = ({ soundData }) => {
     // chunk ごとに平均を取る
     const peaks = map(chunks, mean);
     // chunk の平均の中から最大値を取る
-    const max = max(peaks);
+    const max = lodashMax(peaks);
 
     setPeaks({ max, peaks });
   }, [soundData]);
