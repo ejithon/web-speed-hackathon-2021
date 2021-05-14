@@ -62,9 +62,6 @@
   "typesync": {
     "ignoreDeps": [
       "dev"
-    ],
-    "ignorePackages": [
-      "core-js"
     ]
   }
 }
